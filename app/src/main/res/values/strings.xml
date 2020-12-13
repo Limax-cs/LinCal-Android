@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LinCal</string>
+    <string name="Login.name.str">Nom d\'usuari:</string>
+    <string name="Login.password.str">Contrassenya:</string>
+    <string name="Login.name.txtbox">Escriu el nom...</string>
+    <string name="Login.password.txtbox">**********</string>
+    <string name="Login.button">Inicia Sessió</string>
+    <string name="Login.button.Async">Sincronitza</string>
+    <string name="Login.adverts.lbl">bruh</string>
+</resources>
