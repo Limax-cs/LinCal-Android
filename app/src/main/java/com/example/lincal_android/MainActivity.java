@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     EditText user = (EditText) findViewById(R.id.Lincal_login_user_txtbox);
                     EditText password = (EditText) findViewById(R.id.Lincal_login_password_txtbox);
 
-                    String query = String.format("http://192.168.1.3:9000/AndroidController/LogIn");
+                    String query = String.format("http://10.192.18.5:9000/AndroidController/LogIn");
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setReadTimeout(10000);
