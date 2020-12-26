@@ -1,4 +1,4 @@
-package com.example.lincal_android;
+opackage com.example.lincal_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
