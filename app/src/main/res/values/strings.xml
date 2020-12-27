@@ -7,4 +7,5 @@
     <string name="Login.button">Inicia Sessió</string>
     <string name="Login.button.Async">Sincronitza</string>
     <string name="Login.adverts.lbl">bruh</string>
+    <string name="Login.button.singup">Crear sessió</string>
 </resources>

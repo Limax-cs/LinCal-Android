@@ -1,8 +1,10 @@
-opackage com.example.lincal_android;
+package com.example.lincal_android;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     EditText user = (EditText) findViewById(R.id.Lincal_login_user_txtbox);
                     EditText password = (EditText) findViewById(R.id.Lincal_login_password_txtbox);
 
-                    String query = String.format("http://10.192.18.5:9000/AndroidController/LogIn");
+                    String query = String.format("http://192.168.1.3:9000/AndroidController/LogIn");
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setReadTimeout(10000);
@@ -114,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
 
                     // Mostrar resultat en el quadre de text.
                     // Codi incorrecte
-                    // EditText n = (EditText) findViewById (R.id.edit_message);
-                    //n.setText(result);
+                    TextView n = (TextView) findViewById (R.id.Lincal_login_adverts);
+                    n.setText(result);
 
                     //Codi correcte
                     Log.i("login_response", result);
@@ -123,6 +125,21 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             TextView n = (TextView) findViewById(R.id.Lincal_login_adverts);
                             n.setText("Threads: " + result);
+
+                            if(result.contains("OK"))
+                            {
+                                //Desa les dades en el Singleton
+                                Singleton.getInstance().userName = user.getText().toString();
+                                Singleton.getInstance().password = user.getText().toString();
+
+                                //Accedeix a la següent pantalla
+                                Context context = getApplicationContext();
+                                Intent intent = new Intent(context,GlobalCalendar.class);
+                                startActivity(intent);
+                            }
+                            else{
+                                n.setText("Usuari i/o contrassenya incorrectes");
+                            }
                         }
                     });
 
@@ -133,12 +150,17 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
+    /*
+
     public void sayHelloAsynktask(View view) {
         EditText user = (EditText) findViewById(R.id.Lincal_login_user_txtbox);
         EditText password = (EditText) findViewById(R.id.Lincal_login_password_txtbox);
         new HelloMessage(this).execute("http://192.168.1.3:9000/Application/LogIn?user=" + user.getText().toString() + "&password=" + password.getText().toString());
     }
 
+    */
+
+/*
     private class HelloMessage extends AsyncTask<String, Void, String> {
         Context context;
         InputStream stream = null;
@@ -156,8 +178,8 @@ public class MainActivity extends AppCompatActivity {
                 String query = String.format(urls[0]);
                 URL url = new URL(query);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(10000 /* milliseconds */);
-                conn.setConnectTimeout(15000 /* milliseconds */);
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
                 conn.setRequestMethod("GET");
                 conn.setDoInput(true);
                 conn.connect();
@@ -194,4 +216,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+    */
 }
