@@ -4,7 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.JsonReader;
 import android.util.Log;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -31,7 +37,7 @@ public class GlobalCalendar extends AppCompatActivity {
             public void run() {
 
                 try{
-                    String query = String.format("http://192.168.1.3:9000/AndroidController/getCalendarList");
+                    String query = String.format("http://192.168.1.4:9000/AndroidController/getCalendarList?user=" + Singleton.getInstance().userName);
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setReadTimeout(10000);
@@ -50,26 +56,44 @@ public class GlobalCalendar extends AppCompatActivity {
                     }
                     result = sb.toString();
 
+
                     Log.i("Result:llista jugadors", result);
                     boolean post = handler.post(new Runnable() {
-                        @Override
                         public void run() {
+                            TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
+
                             if(!result.contains("Error"))
                             {
                                 //TODO: mostreig de la llista d'objectes a l'aplicació
+                                textview.setText(result);
+                                ShowJSONresult(result);
                             }
                             else
                             {
                                 //TODO: mostra error de llista buida
+                                textview.setText("bruh");
                             }
                         }
                     });
                 }
                 catch (Exception e){
                     e.printStackTrace();
+                    TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
+                    textview.setText("Error");
                 }
 
             }
         }).start();
+    }
+
+    public void ShowJSONresult(String result)
+    {
+
+        try {
+            Singleton.getInstance().ownedCalendar = new JSONArray(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }
