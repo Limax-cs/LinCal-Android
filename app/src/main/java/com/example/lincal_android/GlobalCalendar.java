@@ -60,7 +60,7 @@ public class GlobalCalendar extends AppCompatActivity {
                     Log.i("Result:llista jugadors", result);
                     boolean post = handler.post(new Runnable() {
                         public void run() {
-                            TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
+                            TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_warnings);
 
                             if(!result.contains("Error"))
                             {
@@ -78,7 +78,7 @@ public class GlobalCalendar extends AppCompatActivity {
                 }
                 catch (Exception e){
                     e.printStackTrace();
-                    TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
+                    TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_warnings);
                     textview.setText("Error");
                 }
 

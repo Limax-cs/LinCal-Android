@@ -5,21 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.Manifest;
-import android.os.StrictMode;
-import android.content.pm.PackageManager;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -62,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void SignUp(View view){
+        Intent intent = new Intent(this,SignUp.class);
+        startActivity(intent);
+    }
+
     public void LoginApp(View view) {
 
 
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     EditText user = (EditText) findViewById(R.id.Lincal_login_user_txtbox);
                     EditText password = (EditText) findViewById(R.id.Lincal_login_password_txtbox);
 
-                    String query = String.format("http://192.168.1.4:9000/AndroidController/LogIn"); //IP Albert:192.168.1.4
+                    String query = String.format("http://192.168.1.6:9000/AndroidController/LogIn"); //IP Albert:192.168.1.4
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setReadTimeout(10000);
@@ -116,14 +115,14 @@ public class MainActivity extends AppCompatActivity {
 
                     // Mostrar resultat en el quadre de text.
                     // Codi incorrecte
-                    TextView n = (TextView) findViewById (R.id.Lincal_login_adverts);
+                    TextView n = (TextView) findViewById (R.id.Lincal_login_warnings);
                     n.setText(result);
 
                     //Codi correcte
                     Log.i("login_response", result);
                     handler.post(new Runnable() {
                         public void run() {
-                            TextView n = (TextView) findViewById(R.id.Lincal_login_adverts);
+                            TextView n = (TextView) findViewById(R.id.Lincal_login_warnings);
                             n.setText("Threads: " + result);
 
                             if(result.contains("OK"))

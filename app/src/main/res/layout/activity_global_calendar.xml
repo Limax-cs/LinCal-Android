@@ -12,11 +12,18 @@
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
     android:gravity="center_vertical"
-    android:background="green"
     android:orientation="horizontal"
     android:padding="10dp"
     app:layout_constraintTop_toTopOf="parent"
     >
 
 </LinearLayout>
+
+    <TextView
+        android:id="@+id/LinCal_GlobalCalendar_warnings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="184dp"
+        tools:layout_editor_absoluteY="615dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
