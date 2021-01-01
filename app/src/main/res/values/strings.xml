@@ -9,4 +9,7 @@
     <string name="Login.button.singup">Crear sessió</string>
     <string name="Login.adverts.lbl">_</string>
     <string name="GlobalCalendar.adverts.lbl">_</string>
+    <string name="GlobalCalendar.Title">CALENDARI</string>
+    <string name="GlobalCalendar.eventsTitle">Esdeveniments</string>
+    <string name="GlobalCalendar.tasksTitle">Tasques</string>
 </resources>

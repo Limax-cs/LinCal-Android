@@ -1,6 +1,7 @@
 package com.example.lincal_android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class GlobalCalendar extends AppCompatActivity {
 
@@ -60,26 +65,26 @@ public class GlobalCalendar extends AppCompatActivity {
                     Log.i("Result:llista jugadors", result);
                     boolean post = handler.post(new Runnable() {
                         public void run() {
-                            TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
+                            //TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
 
                             if(!result.contains("Error"))
                             {
                                 //TODO: mostreig de la llista d'objectes a l'aplicació
-                                textview.setText(result);
+                                //textview.setText(result);
                                 ShowJSONresult(result);
                             }
                             else
                             {
                                 //TODO: mostra error de llista buida
-                                textview.setText("bruh");
+                                //textview.setText("bruh");
                             }
                         }
                     });
                 }
                 catch (Exception e){
                     e.printStackTrace();
-                    TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
-                    textview.setText("Error");
+                    //TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
+                    //textview.setText("Error");
                 }
 
             }
@@ -91,9 +96,30 @@ public class GlobalCalendar extends AppCompatActivity {
 
         try {
             Singleton.getInstance().ownedCalendar = new JSONArray(result);
+
+            RecyclerView daysRecyclerView = findViewById(R.id.GlobalCalendar_RecyclerView);
+
+            List<Day> days = new ArrayList<>();
+            days.clear();
+
+            Date today = new Date();
+
+
+            for(int i=-20; i < 20; i++)
+            {
+                Day day = new Day();
+
+                day.dateDay.setTime((long)(today.getTime() + i * 24 * 3600 * 1000));
+                days.add(day);
+            }
+
+            final DaysAdapter daysAdapter = new DaysAdapter(days);
+            daysRecyclerView.setAdapter(daysAdapter);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
+
 }
