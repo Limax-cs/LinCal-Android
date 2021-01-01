@@ -65,7 +65,11 @@ public class GlobalCalendar extends AppCompatActivity {
                     Log.i("Result:llista jugadors", result);
                     boolean post = handler.post(new Runnable() {
                         public void run() {
+<<<<<<< HEAD
                             //TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
+=======
+                            TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_warnings);
+>>>>>>> a92954f02c1fa2ba3ac37570f3470be56dda8b1b
 
                             if(!result.contains("Error"))
                             {
@@ -83,8 +87,13 @@ public class GlobalCalendar extends AppCompatActivity {
                 }
                 catch (Exception e){
                     e.printStackTrace();
+<<<<<<< HEAD
                     //TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_adverts);
                     //textview.setText("Error");
+=======
+                    TextView textview = (TextView) findViewById(R.id.LinCal_GlobalCalendar_warnings);
+                    textview.setText("Error");
+>>>>>>> a92954f02c1fa2ba3ac37570f3470be56dda8b1b
                 }
 
             }

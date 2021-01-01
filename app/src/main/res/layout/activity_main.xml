@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:ems="10"
-        android:hint="@string/Login.name.txtbox"
+        android:hint="@string/User.txtbox"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:ems="10"
-        android:hint="@string/Login.password.txtbox"
+        android:hint="@string/Password.txtbox"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -39,7 +39,7 @@
         android:layout_marginStart="96dp"
         android:layout_marginLeft="96dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/Login.password.str"
+        android:text="@string/Password.str"
         app:layout_constraintBottom_toTopOf="@+id/Lincal_login_password_txtbox"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -50,7 +50,7 @@
         android:layout_marginStart="96dp"
         android:layout_marginLeft="96dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/Login.name.str"
+        android:text="@string/User.str"
         app:layout_constraintBottom_toTopOf="@+id/Lincal_login_user_txtbox"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -66,11 +66,11 @@
         app:layout_constraintTop_toBottomOf="@+id/Lincal_login_password_txtbox" />
 
     <TextView
-        android:id="@+id/Lincal_login_adverts"
+        android:id="@+id/Lincal_login_warnings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
-        android:text="@string/Login.adverts.lbl"
+        android:text="@string/Login.warnings.lbl"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -81,7 +81,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/Login.button.singup"
+        android:onClick="SignUp"
+        android:text="@string/Login.button.signin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Lincal_login_button" />
