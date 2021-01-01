@@ -9,11 +9,9 @@
     <string name="Login.button.signin">Crea sessió</string>
     <string name="Login.warnings.lbl">_</string>
     <string name="GlobalCalendar.adverts.lbl">_</string>
-<<<<<<< HEAD
     <string name="GlobalCalendar.Title">CALENDARI</string>
     <string name="GlobalCalendar.eventsTitle">Esdeveniments</string>
     <string name="GlobalCalendar.tasksTitle">Tasques</string>
-=======
 
     <!--Pantalla SignUp-->
     <string name="FullName.str">Nom complet:</string>
@@ -23,5 +21,4 @@
     <string name="SignUp.button.signup">Crea usuari</string>
     <string name="SignUp.warnings.lbl">_</string>
 
->>>>>>> a92954f02c1fa2ba3ac37570f3470be56dda8b1b
 </resources>

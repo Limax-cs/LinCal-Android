@@ -51,7 +51,7 @@ public class SignUp extends AppCompatActivity {
                     EditText password = (EditText) findViewById(R.id.Lincal_signup_password_txtbox);
 
                     n.setText("2");
-                    String query = String.format("http://192.168.1.6:9000/AndroidController/SignUp"); //IP Albert:192.168.1.4
+                    String query = String.format("http://192.168.1.4:9000/AndroidController/SignUp"); //IP Albert:192.168.1.4
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setReadTimeout(10000);
@@ -119,8 +119,7 @@ public class SignUp extends AppCompatActivity {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    TextView n = (TextView) findViewById (R.id.Lincal_signup_warnings);
-                    //n.setText("Error");
+                    n.setText("Error");
                 }
             }
         }).start();

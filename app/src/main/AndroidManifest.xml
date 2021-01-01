@@ -17,10 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LinCalAndroid"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
-=======
+
         <activity android:name=".SignUp"></activity>
->>>>>>> a92954f02c1fa2ba3ac37570f3470be56dda8b1b
         <activity android:name=".GlobalCalendar" />
         <activity android:name=".MainActivity">
             <intent-filter>
