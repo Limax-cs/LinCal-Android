@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewCalendar">
+
+    <View
+        android:id="@+id/NewCalendar_layout"
+        android:layout_width="356dp"
+        android:layout_height="676dp"
+        android:background="@color/LinCal_LightGray"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/NewCalendar_header"
+        android:layout_width="356dp"
+        android:layout_height="130dp"
+        android:background="@color/LinCal_lighterMainColor"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/NewCalendar_layout"
+        app:layout_constraintStart_toStartOf="@+id/NewCalendar_layout"
+        app:layout_constraintTop_toTopOf="@+id/NewCalendar_layout">
+
+        <ImageView
+            android:id="@+id/NewCalendar_show_drawable"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:alpha="0.8"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_calendar"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/CalTask_show_calendar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="@string/NewCalendar.title"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/NewCalendar_name_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/NewCalendar.name.str"
+        app:layout_constraintBottom_toTopOf="@+id/NewCalendar_name_txtbox"
+        app:layout_constraintStart_toStartOf="@+id/NewCalendar_layout" />
+
+    <TextView
+        android:id="@+id/NewCalendar_description_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/NewCalendar.description.str"
+        app:layout_constraintBottom_toTopOf="@+id/NewCalendar_description_txtbox"
+        app:layout_constraintStart_toStartOf="@+id/NewCalendar_layout" />
+
+    <EditText
+        android:id="@+id/NewCalendar_name_txtbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:ems="10"
+        android:hint="@string/NewCalendar.name.txtbox"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalendar_header" />
+
+    <EditText
+        android:id="@+id/NewCalendar_description_txtbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/NewCalendar.description.txtbox"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalendar_name_txtbox" />
+
+    <CheckBox
+        android:id="@+id/NewCalendar_isPublic_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="72dp"
+        android:text="@string/NewCalendar.isPublic.str"
+        app:layout_constraintStart_toStartOf="@+id/NewCalendar_layout"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalendar_description_txtbox" />
+
+    <Button
+        android:id="@+id/NewCalendar_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:onClick="CreateCalendar"
+        android:text="@string/NewCalendar.createCalendar.button"
+        app:layout_constraintBottom_toBottomOf="@+id/NewCalendar_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

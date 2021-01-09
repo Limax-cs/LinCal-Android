@@ -8,6 +8,8 @@
     <string name="Login.button.Async">Sincronitza</string>
     <string name="Login.button.signin">Crea sessió</string>
     <string name="Login.warnings.lbl">_</string>
+
+    <!--Global Calendar-->
     <string name="GlobalCalendar.adverts.lbl">_</string>
     <string name="GlobalCalendar.Title">CALENDARI</string>
     <string name="GlobalCalendar.eventsTitle">Esdeveniments</string>
@@ -20,5 +22,35 @@
     <string name="Email.txtbox">***@MX.TLD</string>
     <string name="SignUp.button.signup">Crea usuari</string>
     <string name="SignUp.warnings.lbl">_</string>
+
+    <!--CalEvent-->
+    <string name="CalEvent.default.name">CalEvent name</string>
+    <string name="CalEvent.default.calendar">CalEvent calendar</string>
+    <string name="CalEvent.default.description">CalEvent description</string>
+    <string name="CalEvent.default.onlineAddress"></string>
+    <string name="CalEvent.default.physicalAddress">CalEvent PhysicalAddress</string>
+    <string name="CalEvent.default.startDate">Dia 0 de Gener del 0000, 00:00:00</string>
+    <string name="CalEvent.default.endDate">Dia 0 de Gener del 0000, 00:00:00</string>
+
+    <!--CalTask-->
+    <string name="CalTask.default.name">CalTask name</string>
+    <string name="CalTask.default.calendar">CalTask calendar</string>
+    <string name="CalTask.default.description">CalTask description</string>
+    <string name="CalTask.default.Date">Dia 0 de Gener del 0000, 00:00:00</string>
+    <string name="CalTask.completed">TASCA COMPLETADA?</string>
+
+    <!--Descripció Botons-->
+    <string name="GeneralButtons.EditDescription">EDITA</string>
+    <string name="GeneralButtons.DeleteDescription">ELIMINAR</string>
+    <string name="GeneralButtons.CompleteDescription">COMPLETA/ DESCOMPLETA LA TASCA</string>
+
+    <!--New Calendar-->
+    <string name="NewCalendar.title">NOU CALENDARI</string>
+    <string name="NewCalendar.name.str">Nom del calendari:</string>
+    <string name="NewCalendar.name.txtbox">Escriu el nom del calendari...</string>
+    <string name="NewCalendar.description.str">Descripció del calendari:</string>
+    <string name="NewCalendar.description.txtbox">Escriu la descripció del calendari...</string>
+    <string name="NewCalendar.isPublic.str">Posa en públic</string>
+    <string name="NewCalendar.createCalendar.button">Crea el Calendari</string>
 
 </resources>

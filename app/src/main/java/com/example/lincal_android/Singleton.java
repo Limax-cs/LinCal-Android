@@ -11,7 +11,9 @@ public class Singleton {
     //Aquí s'han de posar les variables globals que volguem mantenir
     public String userName;
     public String password;
-    public JSONArray ownedCalendar;
+    public JSONArray ownedCalendars;
+    public JSONArray editableCalendars;
+    public JSONArray nonEditableCalendars;
 
 
     public static Singleton getInstance() { return ourInstance;}

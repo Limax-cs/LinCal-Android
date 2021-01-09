@@ -6,7 +6,7 @@ public class CalEvent {
 
     // Constructor
     public CalEvent( String eventName, String eventDescription, Date starteventDate,
-                    Date finishedeventDate, String addressPhysical, String addressOnline, String calendarName)
+                    Date finishedeventDate, String addressPhysical, String addressOnline, String calendarName, Boolean owned, Boolean editable)
     {
         this.name = eventName;
         this.description = eventDescription;
@@ -15,6 +15,8 @@ public class CalEvent {
         this.addressOnline = addressOnline;
         this.addressPhysical = addressPhysical;
         this.calendarName = calendarName;
+        this.owned = owned;
+        this.editable = editable;
     }
 
     // Atributs
@@ -25,5 +27,7 @@ public class CalEvent {
     public String addressPhysical;
     public String addressOnline;
     public String calendarName;
+    public boolean owned;
+    public boolean editable;
 
 }

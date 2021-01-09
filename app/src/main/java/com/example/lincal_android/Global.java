@@ -13,6 +13,8 @@ public class Global extends Application {
         super.onCreate();
         Singleton.getInstance().userName = "GlobalUserName";
         Singleton.getInstance().password = "Password";
-        Singleton.getInstance().ownedCalendar = new JSONArray();
+        Singleton.getInstance().ownedCalendars = new JSONArray();
+        Singleton.getInstance().editableCalendars = new JSONArray();
+        Singleton.getInstance().nonEditableCalendars = new JSONArray();
     }
 }

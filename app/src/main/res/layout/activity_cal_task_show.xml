@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CalTaskShow">
+
+    <View
+        android:id="@+id/CalTask_show_layout"
+        android:layout_width="356dp"
+        android:layout_height="676dp"
+        android:background="@color/LinCal_lighterMainColor"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/CalTask_show_drawable"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="44dp"
+        android:alpha="0.8"
+        android:contentDescription="@string/app_name"
+        android:rotation="-10"
+        android:src="@drawable/ic_task"
+        app:layout_constraintStart_toStartOf="@+id/CalTask_show_layout"
+        app:layout_constraintTop_toTopOf="@+id/CalTask_show_layout"
+        app:tint="@color/white" />
+
+    <ImageView
+        android:id="@+id/CalTask_show_calendarImage"
+        android:layout_width="52dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="180dp"
+        android:alpha="1"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintStart_toStartOf="@+id/CalTask_show_layout"
+        app:layout_constraintTop_toTopOf="@+id/CalTask_show_layout"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/CalTask_show_calendar"
+        android:layout_width="154dp"
+        android:layout_height="30dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="124dp"
+        android:layout_weight="1"
+        android:text="@string/CalTask.default.calendar"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:translationY="70dp"
+        app:layout_constraintStart_toEndOf="@+id/CalTask_show_calendarImage"
+        app:layout_constraintTop_toTopOf="@+id/CalTask_show_layout" />
+
+    <TextView
+        android:id="@+id/CalTask_show_name"
+        android:layout_width="171dp"
+        android:layout_height="111dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:text="@string/CalTask.default.name"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:translationY="70dp"
+        app:layout_constraintStart_toEndOf="@+id/CalTask_show_drawable"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/CalTask_show_Date"
+        android:layout_width="263dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="240dp"
+        android:text="@string/CalTask.default.Date"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/CalTask_show_layout"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="@+id/CalTask_show_layout"
+        app:layout_constraintTop_toTopOf="@+id/CalTask_show_layout" />
+
+    <TextView
+        android:id="@+id/CalTask_show_description"
+        android:layout_width="309dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/CalTask.default.description"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/CalTask_show_layout"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/CalTask_show_layout"
+        app:layout_constraintTop_toBottomOf="@+id/CalTask_show_Date" />
+
+    <TextView
+        android:id="@+id/CalTask_completed_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/CalTask.completed"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/CalTask_show_layout"
+        app:layout_constraintTop_toBottomOf="@+id/CalTask_show_description" />
+
+    <ImageView
+        android:id="@+id/CalTask_show_taskcompleted"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+
+        android:alpha="0.8"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_unchecked"
+        app:layout_constraintEnd_toEndOf="@+id/CalTask_show_layout"
+        app:layout_constraintTop_toBottomOf="@+id/CalTask_show_description"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/CalEvent_editButton"
+        android:layout_width="85dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/LinCal_WhiteGray"
+        android:contentDescription="@string/GeneralButtons.EditDescription"
+        android:onClick="editTask"
+        android:src="@drawable/ic_edit"
+        android:tint="@color/LinCal_lighterMainColor"
+        app:layout_constraintBottom_toBottomOf="@+id/CalTask_show_layout"
+        app:layout_constraintStart_toStartOf="@+id/CalTask_show_layout" />
+
+    <ImageButton
+        android:id="@+id/CalTask_completeTaskButton"
+        android:layout_width="85dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/LinCal_WhiteGray"
+        android:contentDescription="@string/GeneralButtons.CompleteDescription"
+        android:onClick="completeTask"
+        android:src="@drawable/ic_complete"
+        android:tint="@color/LinCal_lighterMainColor"
+        app:layout_constraintBottom_toBottomOf="@+id/CalTask_show_layout"
+        app:layout_constraintEnd_toEndOf="@+id/CalTask_show_layout" />
+
+    <ImageButton
+        android:id="@+id/CalEvent_deleteButton"
+        android:layout_width="85dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/LinCal_WhiteGray"
+        android:contentDescription="@string/GeneralButtons.DeleteDescription"
+        android:onClick="deleteTask"
+        android:src="@drawable/ic_delete"
+        android:tint="@color/LinCal_lighterMainColor"
+        app:layout_constraintBottom_toBottomOf="@+id/CalTask_show_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

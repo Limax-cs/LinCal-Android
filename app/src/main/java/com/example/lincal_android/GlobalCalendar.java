@@ -3,10 +3,13 @@ package com.example.lincal_android;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -93,7 +96,11 @@ public class GlobalCalendar extends AppCompatActivity {
     {
 
         try {
-            Singleton.getInstance().ownedCalendar = new JSONArray(result);
+
+            JSONObject Calendars = new JSONObject(result);
+            Singleton.getInstance().ownedCalendars = Calendars.getJSONArray("ownedCalendars");
+            Singleton.getInstance().editableCalendars = Calendars.getJSONArray("editableCalendars");
+            Singleton.getInstance().nonEditableCalendars = Calendars.getJSONArray("nonEditableCalendars");
 
             RecyclerView daysRecyclerView = findViewById(R.id.GlobalCalendar_RecyclerView);
 
@@ -111,13 +118,21 @@ public class GlobalCalendar extends AppCompatActivity {
                 days.add(day);
             }
 
-            final DaysAdapter daysAdapter = new DaysAdapter(days);
+            Context context = getApplicationContext();
+            final DaysAdapter daysAdapter = new DaysAdapter(days, context);
             daysRecyclerView.setAdapter(daysAdapter);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
+
+    //Botons de la pantalla
+    public void CreateCalendarLayout(View view)
+    {
+        Intent intent = new Intent(this,NewCalendar.class);
+        startActivity(intent);
+    }
+
 
 }

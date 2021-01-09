@@ -49,7 +49,7 @@
         android:orientation="horizontal"
         android:padding="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/GlobalCalendar_buttons_box"
         app:layout_constraintTop_toBottomOf="@+id/GlobalCalendar_header" />
 
 
@@ -67,5 +67,44 @@
         app:layout_constraintTop_toBottomOf="parent"
         />
         -->
+    <LinearLayout
+        android:id="@+id/GlobalCalendar_buttons_box"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/LinCal_LightGray"
+        android:gravity="center_vertical"
+        android:measureWithLargestChild="false"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/GlobalCalendar_addEventButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_event_add"
+            android:tint="@color/LinCal_lighterMainColor"
+            android:layout_weight="1"
+            ></ImageButton>
+
+        <ImageButton
+            android:id="@+id/GlobalCalendar_addCalendarButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/LinCal_mainColor"
+            android:onClick="CreateCalendarLayout"
+            android:src="@drawable/ic_calendar_add"
+
+            android:tint="@color/LinCal_WhiteGray"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/GlobalCalendar_addTaskButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:adjustViewBounds="false"
+            android:baselineAlignBottom="false"
+            android:src="@drawable/ic_task_add"
+            android:tint="@color/LinCal_lighterMainColor"
+            android:layout_weight="1"></ImageButton>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

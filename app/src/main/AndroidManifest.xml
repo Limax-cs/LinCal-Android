@@ -18,7 +18,30 @@
         android:theme="@style/Theme.LinCalAndroid"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".SignUp"></activity>
+        <activity android:name=".NewCalendar"
+            android:parentActivityName=".GlobalCalendar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GlobalCalendar" />
+        </activity>
+
+        <activity
+            android:name=".CalTaskShow"
+            android:parentActivityName=".GlobalCalendar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GlobalCalendar" />
+        </activity>
+
+        <activity
+            android:name=".CalEventShow"
+            android:parentActivityName=".GlobalCalendar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GlobalCalendar" />
+        </activity>
+
+        <activity android:name=".SignUp" />
         <activity android:name=".GlobalCalendar" />
         <activity android:name=".MainActivity">
             <intent-filter>

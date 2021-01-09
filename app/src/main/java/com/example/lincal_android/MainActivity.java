@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 //Desa les dades en el Singleton
                                 Singleton.getInstance().userName = user.getText().toString();
-                                Singleton.getInstance().password = user.getText().toString();
+                                Singleton.getInstance().password = password.getText().toString();
 
                                 //Accedeix a la següent pantalla
                                 Context context = getApplicationContext();

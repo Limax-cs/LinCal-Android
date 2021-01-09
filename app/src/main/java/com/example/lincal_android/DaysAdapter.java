@@ -1,5 +1,6 @@
 package com.example.lincal_android;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +24,14 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder
     private List<Day> days;
     private RecyclerView.RecycledViewPool CalEventViewPool = new RecyclerView.RecycledViewPool();
     private RecyclerView.RecycledViewPool CalTaskViewPool = new RecyclerView.RecycledViewPool();
+    private Context context;
 
 
-    public DaysAdapter(List<Day> days)
+    public DaysAdapter(List<Day> days, Context context)
     {
+
         this.days = days;
+        this.context = context;
     }
 
     @NonNull
@@ -115,74 +119,76 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder
             );
 
             //Array de calendaris
-            for(int i=0;i<Singleton.getInstance().ownedCalendar.length(); i++)
-            {
-                try {
-                    JSONObject calendarItem = Singleton.getInstance().ownedCalendar.getJSONObject(i);
-                    String Calendar = calendarItem.getString("calName");
-
-                    //Array d'esdeveniments
-                    JSONArray eventItemArray = calendarItem.getJSONArray("events");
+            setEventsAndTasksCalendars(Singleton.getInstance().ownedCalendars,events,tasks,day,true,true);
+            setEventsAndTasksCalendars(Singleton.getInstance().editableCalendars,events,tasks,day,false,true);
+            setEventsAndTasksCalendars(Singleton.getInstance().nonEditableCalendars,events,tasks,day,false,false);
 
 
-                    for(int j=0;j<eventItemArray.length(); j++)
-                    {
-                        JSONObject eventItem = eventItemArray.getJSONObject(j);
-                        Date startDate = new Date(eventItem.getString("startDate"));
-                        Date endDate = new Date(eventItem.getString("endDate"));
-
-                        if(
-                                ((startDate.getYear() == day.dateDay.getYear()) && (startDate.getMonth() == day.dateDay.getMonth()) && (startDate.getDate() == day.dateDay.getDate()) ) ||
-                                ((endDate.getYear() == day.dateDay.getYear()) && (endDate.getMonth() == day.dateDay.getMonth()) && (endDate.getDate() == day.dateDay.getDate()) )
-                        )
-                        {
-
-                            String name = eventItem.getString("name");
-                            String description = eventItem.getString("description");
-                            String addressPhysical = eventItem.getString("addressPhysical");
-                            String addressOnline = eventItem.getString("addressOnline");
-
-                            CalEvent event = new CalEvent(name, description, startDate, endDate, addressPhysical, addressOnline, Calendar);
-                            events.add(event);
-                        }
-                    }
-
-                    //Array de tasques
-                    JSONArray taskItemArray = calendarItem.getJSONArray("tasks");
-                    for(int j=0;j<taskItemArray.length(); j++)
-                    {
-                        JSONObject taskItem = taskItemArray.getJSONObject(j);
-                        Date date = new Date(taskItem.getString("date"));
-
-                        if((date.getYear() == day.dateDay.getYear()) && (date.getMonth() == day.dateDay.getMonth()) && (date.getDate() == day.dateDay.getDate()) )
-                        {
-
-                            String name = taskItem.getString("name");
-                            String description = taskItem.getString("description");
-                            boolean completed = taskItem.getBoolean("completed");
-
-                            CalTask task = new CalTask(name, description, date, completed, Calendar);
-                            tasks.add(task);
-                        }
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-
-            final CalEventsAdapter calEventsAdapter = new CalEventsAdapter(events);
+            final CalEventsAdapter calEventsAdapter = new CalEventsAdapter(events, context);
             recyclerViewEvents.setLayoutManager(CalEventlayoutManager);
             recyclerViewEvents.setAdapter(calEventsAdapter);
             recyclerViewEvents.setRecycledViewPool(CalEventViewPool);
 
-            final CalTasksAdapter calTasksAdapter = new CalTasksAdapter(tasks);
+            final CalTasksAdapter calTasksAdapter = new CalTasksAdapter(tasks, context);
             recyclerViewTasks.setLayoutManager(CalTasklayoutManager);
             recyclerViewTasks.setAdapter(calTasksAdapter);
             recyclerViewTasks.setRecycledViewPool(CalTaskViewPool);
+        }
+    }
+
+    //Funció per afegir esdeveniments i tasques
+    public void setEventsAndTasksCalendars(JSONArray CalendarList, List<CalEvent> events, List<CalTask> tasks, Day day, Boolean owned, Boolean editable)
+    {
+        for(int i=0;i<CalendarList.length(); i++) {
+
+            try {
+                JSONObject calendarItem = CalendarList.getJSONObject(i);
+                String Calendar = calendarItem.getString("calName");
+
+                //Array d'esdeveniments
+                JSONArray eventItemArray = calendarItem.getJSONArray("events");
+
+
+                for (int j = 0; j < eventItemArray.length(); j++) {
+                    JSONObject eventItem = eventItemArray.getJSONObject(j);
+                    Date startDate = new Date(eventItem.getString("startDate"));
+                    Date endDate = new Date(eventItem.getString("endDate"));
+
+                    if (
+                            ((startDate.getYear() == day.dateDay.getYear()) && (startDate.getMonth() == day.dateDay.getMonth()) && (startDate.getDate() == day.dateDay.getDate())) ||
+                                    ((endDate.getYear() == day.dateDay.getYear()) && (endDate.getMonth() == day.dateDay.getMonth()) && (endDate.getDate() == day.dateDay.getDate()))
+                    ) {
+
+                        String name = eventItem.getString("name");
+                        String description = eventItem.getString("description");
+                        String addressPhysical = eventItem.getString("addressPhysical");
+                        String addressOnline = eventItem.getString("addressOnline");
+
+                        CalEvent event = new CalEvent(name, description, startDate, endDate, addressPhysical, addressOnline, Calendar,owned,editable);
+                        events.add(event);
+                    }
+                }
+
+                //Array de tasques
+                JSONArray taskItemArray = calendarItem.getJSONArray("tasks");
+                for (int j = 0; j < taskItemArray.length(); j++) {
+                    JSONObject taskItem = taskItemArray.getJSONObject(j);
+                    Date date = new Date(taskItem.getString("date"));
+
+                    if ((date.getYear() == day.dateDay.getYear()) && (date.getMonth() == day.dateDay.getMonth()) && (date.getDate() == day.dateDay.getDate())) {
+
+                        String name = taskItem.getString("name");
+                        String description = taskItem.getString("description");
+                        boolean completed = taskItem.getBoolean("completed");
+
+                        CalTask task = new CalTask(name, description, date, completed, Calendar,owned,editable);
+                        tasks.add(task);
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
