@@ -186,6 +186,7 @@
         android:onClick="editEvent"
         android:src="@drawable/ic_edit"
         android:tint="@color/LinCal_lighterMainColor"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/CalEvent_show_layout"
         app:layout_constraintStart_toStartOf="@+id/CalEvent_show_layout" />
 
@@ -201,6 +202,7 @@
         android:onClick="deleteEvent"
         android:src="@drawable/ic_delete"
         android:tint="@color/LinCal_lighterMainColor"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/CalEvent_show_layout"
         app:layout_constraintEnd_toEndOf="@+id/CalEvent_show_layout" />
 

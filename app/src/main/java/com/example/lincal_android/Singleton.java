@@ -14,6 +14,8 @@ public class Singleton {
     public JSONArray ownedCalendars;
     public JSONArray editableCalendars;
     public JSONArray nonEditableCalendars;
+    public List<LinCalendar> CalendarList;
+    public String IPaddress;
 
 
     public static Singleton getInstance() { return ourInstance;}

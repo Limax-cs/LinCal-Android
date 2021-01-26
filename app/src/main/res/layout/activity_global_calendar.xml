@@ -9,37 +9,46 @@
     tools:context=".GlobalCalendar">
 
 
-<LinearLayout
-    android:id = "@+id/GlobalCalendar_header"
-    android:layout_width="match_parent"
-    android:layout_height="?actionBarSize"
-    android:gravity="center_vertical"
-    android:background="@color/LinCal_lightMainColor"
-    android:orientation="horizontal"
-    android:padding="10dp"
-    app:layout_constraintTop_toTopOf="parent"
-    >
+    <LinearLayout
+        android:id = "@+id/GlobalCalendar_header"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:gravity="center_vertical"
+        android:background="@color/LinCal_lightMainColor"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
-    <ImageView
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_menu"
-        app:tint="@color/white"
-         />
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/GlobalCalendar.Title"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        />
-</LinearLayout>
+        <ImageView
+            android:id="@+id/GlobalCalendar_SelectToday"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:contentDescription="@string/app_name"
+            android:onClick="setToday"
+            android:src="@drawable/ic_today"
+            app:tint="@color/white" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/GlobalCalendar.Title"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+        <ImageView
+            android:id="@+id/GlobalCalendar_SelectDay"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:contentDescription="@string/app_name"
+            android:onClick="setDay"
+            android:src="@drawable/ic_calendar"
+            app:tint="@color/white" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/GlobalCalendar_RecyclerView"
@@ -81,10 +90,10 @@
             android:id="@+id/GlobalCalendar_addEventButton"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/ic_event_add"
-            android:tint="@color/LinCal_lighterMainColor"
             android:layout_weight="1"
-            ></ImageButton>
+            android:onClick="CreateEventLayout"
+            android:src="@drawable/ic_event_add"
+            android:tint="@color/LinCal_lighterMainColor"></ImageButton>
 
         <ImageButton
             android:id="@+id/GlobalCalendar_addCalendarButton"
@@ -104,6 +113,7 @@
             android:baselineAlignBottom="false"
             android:src="@drawable/ic_task_add"
             android:tint="@color/LinCal_lighterMainColor"
+            android:visibility="invisible"
             android:layout_weight="1"></ImageButton>
     </LinearLayout>
 

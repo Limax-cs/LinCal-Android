@@ -3,6 +3,7 @@ package com.example.lincal_android;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.os.Handler;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -26,7 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class GlobalCalendar extends AppCompatActivity {
+public class GlobalCalendar extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class GlobalCalendar extends AppCompatActivity {
             public void run() {
 
                 try{
-                    String query = String.format("http://192.168.1.4:9000/AndroidController/getCalendarList?user=" + Singleton.getInstance().userName);
+                    String query = String.format("http://" + Singleton.getInstance().IPaddress + ":9000/AndroidController/getCalendarList?user=" + Singleton.getInstance().userName);
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setReadTimeout(10000);
@@ -101,6 +103,7 @@ public class GlobalCalendar extends AppCompatActivity {
             Singleton.getInstance().ownedCalendars = Calendars.getJSONArray("ownedCalendars");
             Singleton.getInstance().editableCalendars = Calendars.getJSONArray("editableCalendars");
             Singleton.getInstance().nonEditableCalendars = Calendars.getJSONArray("nonEditableCalendars");
+            Singleton.getInstance().CalendarList.clear();
 
             RecyclerView daysRecyclerView = findViewById(R.id.GlobalCalendar_RecyclerView);
 
@@ -109,8 +112,11 @@ public class GlobalCalendar extends AppCompatActivity {
 
             Date today = new Date();
 
+            int daySelectedWeek = today.getDay();
+            if(today.getDay() == 0)
+                daySelectedWeek = 7;
 
-            for(int i=-20; i < 20; i++)
+            for(int i=1-daySelectedWeek; i < (8 - daySelectedWeek); i++)
             {
                 Day day = new Day();
 
@@ -132,6 +138,72 @@ public class GlobalCalendar extends AppCompatActivity {
     {
         Intent intent = new Intent(this,NewCalendar.class);
         startActivity(intent);
+    }
+
+    public void CreateEventLayout(View view)
+    {
+        Intent intent = new Intent(this,NewCalEvent.class);
+        startActivity(intent);
+    }
+
+    //Selecciona Dia
+
+    private void showDatePickerDialog()
+    {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    public void setDay(View view)
+    {
+        showDatePickerDialog();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+        DayUpdate(year,month,dayOfMonth);
+
+    }
+
+    public void setToday(View view)
+    {
+        DayUpdate(new Date().getYear(), new Date().getMonth(), new Date().getDate());
+    }
+
+    public void DayUpdate(int year, int month, int dayOfMonth)
+    {
+        Singleton.getInstance().CalendarList.clear();
+
+        RecyclerView daysRecyclerView = findViewById(R.id.GlobalCalendar_RecyclerView);
+
+        List<Day> days = new ArrayList<>();
+        days.clear();
+
+        Date daySelected = new Date(year,month,dayOfMonth);
+
+        int daySelectedWeek = daySelected.getDay();
+        if(daySelected.getDay() == 0)
+            daySelectedWeek = 7;
+
+
+        for(int i=1-daySelectedWeek; i < (8 - daySelectedWeek); i++)
+        {
+            Day day = new Day();
+
+            day.dateDay.setTime((long)(daySelected.getTime() + i * 24 * 3600 * 1000));
+            days.add(day);
+        }
+
+        Context context = getApplicationContext();
+        final DaysAdapter daysAdapter = new DaysAdapter(days, context);
+        daysRecyclerView.setAdapter(daysAdapter);
     }
 
 

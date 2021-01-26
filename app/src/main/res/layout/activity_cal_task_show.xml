@@ -145,6 +145,7 @@
         android:onClick="editTask"
         android:src="@drawable/ic_edit"
         android:tint="@color/LinCal_lighterMainColor"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/CalTask_show_layout"
         app:layout_constraintStart_toStartOf="@+id/CalTask_show_layout" />
 
@@ -160,6 +161,7 @@
         android:onClick="completeTask"
         android:src="@drawable/ic_complete"
         android:tint="@color/LinCal_lighterMainColor"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/CalTask_show_layout"
         app:layout_constraintEnd_toEndOf="@+id/CalTask_show_layout" />
 
@@ -173,6 +175,7 @@
         android:onClick="deleteTask"
         android:src="@drawable/ic_delete"
         android:tint="@color/LinCal_lighterMainColor"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/CalTask_show_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

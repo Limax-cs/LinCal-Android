@@ -17,14 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LinCalAndroid"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".NewCalendar"
+        <activity android:name=".NewCalEvent"
             android:parentActivityName=".GlobalCalendar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GlobalCalendar" />
         </activity>
-
+        <activity
+            android:name=".NewCalendar"
+            android:parentActivityName=".GlobalCalendar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GlobalCalendar" />
+        </activity>
         <activity
             android:name=".CalTaskShow"
             android:parentActivityName=".GlobalCalendar">
@@ -32,7 +37,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GlobalCalendar" />
         </activity>
-
         <activity
             android:name=".CalEventShow"
             android:parentActivityName=".GlobalCalendar">
@@ -40,7 +44,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GlobalCalendar" />
         </activity>
-
         <activity android:name=".SignUp" />
         <activity android:name=".GlobalCalendar" />
         <activity android:name=".MainActivity">

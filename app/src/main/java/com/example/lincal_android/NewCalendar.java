@@ -2,6 +2,7 @@ package com.example.lincal_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,7 +49,7 @@ public class NewCalendar extends AppCompatActivity {
                     EditText description = (EditText) findViewById(R.id.NewCalendar_description_txtbox);
                     CheckBox isPublic = (CheckBox) findViewById(R.id.NewCalendar_isPublic_str);
 
-                    String query = String.format("http://192.168.1.4:9000/AndroidController/CreateCalendar"); //IP Albert:192.168.1.4
+                    String query = String.format("http://" + Singleton.getInstance().IPaddress + ":9000/AndroidController/CreateCalendar"); //IP Albert:192.168.1.4
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setReadTimeout(10000);
@@ -57,7 +58,7 @@ public class NewCalendar extends AppCompatActivity {
                     conn.setDoInput(true);
                     conn.setDoOutput(true);
                     conn.connect();
-                    
+
                     String params = "user=" + Singleton.getInstance().userName +
                             "&password=" + Singleton.getInstance().password +
                             "&CalName=" + name.getText().toString() +
@@ -116,5 +117,6 @@ public class NewCalendar extends AppCompatActivity {
             }
         }).start();
     }
+
 }
 

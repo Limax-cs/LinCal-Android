@@ -14,6 +14,7 @@
     <string name="GlobalCalendar.Title">CALENDARI</string>
     <string name="GlobalCalendar.eventsTitle">Esdeveniments</string>
     <string name="GlobalCalendar.tasksTitle">Tasques</string>
+    <string name="GlobalCalendar.todayButton">AVUI</string>
 
     <!--Pantalla SignUp-->
     <string name="FullName.str">Nom complet:</string>
@@ -52,5 +53,23 @@
     <string name="NewCalendar.description.txtbox">Escriu la descripció del calendari...</string>
     <string name="NewCalendar.isPublic.str">Posa en públic</string>
     <string name="NewCalendar.createCalendar.button">Crea el Calendari</string>
+
+    <!--New Event-->
+    <string name="NewCalEvent.title">NOU ESDEVENIMENT</string>
+    <string name="NewCalEvent.name.str">Nom de l\'esdeveniment:</string>
+    <string name="NewCalEvent.name.txtbox">Escriu el nom de l\'esdeveniment...</string>
+    <string name="NewCalEvent.description.str">Descripció de l\'esdeveniment:</string>
+    <string name="NewCalEvent.description.txtbox">Escriu la descripció de l\'esdeveniment...</string>
+    <string name="NewCalEvent.isPublic.str">Posa en públic</string>
+    <string name="NewCalEvent.createEvent.button">Crea l\'esdeveniments</string>
+    <string name="DatePickerDialog_button">Data</string>
+    <string name="TimePickerDialog_button">Hora</string>
+    <string name="NewCalEvent.startDate.str">Data d\'inici:</string>
+    <string name="NewCalEvent.endDate.str">Data final:</string>
+    <string name="DateTime.str">00/00/0000, 00:00:00</string>
+    <string name="NewCalEvent.addressPhysical.str">Casa meva</string>
+    <string name="NewCalEvent.addressOnline.str">direcció online [ex. www.google.com]</string>
+    <string name="NewCalEvent.calendar.str">Calendari:</string>
+    <string name="NewCalEvent.calendar.seleccionable">selecciona...</string>
 
 </resources>

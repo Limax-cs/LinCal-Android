@@ -104,6 +104,7 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder
             //Fem la llista d'esdeveniments i tasques de cada dia
             List<CalEvent> events = new ArrayList<CalEvent>();
             List<CalTask> tasks= new ArrayList<CalTask>();
+            Singleton.getInstance().CalendarList.clear();
 
             //Creem els LayoutManager amb configuracions predeterminades de cada RecyclerView
             LinearLayoutManager CalEventlayoutManager = new LinearLayoutManager(
@@ -142,8 +143,15 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder
         for(int i=0;i<CalendarList.length(); i++) {
 
             try {
+
                 JSONObject calendarItem = CalendarList.getJSONObject(i);
                 String Calendar = calendarItem.getString("calName");
+                String CalendarDescription = calendarItem.getString("description");
+                Boolean CalendarIsPublic = calendarItem.getBoolean("isPublic");
+                Date CalendarCreatedAt = new Date(calendarItem.getString("createdAt"));
+
+                LinCalendar calendar = new LinCalendar(Calendar,CalendarDescription,CalendarCreatedAt,CalendarIsPublic,owned,editable);
+
 
                 //Array d'esdeveniments
                 JSONArray eventItemArray = calendarItem.getJSONArray("events");
@@ -166,6 +174,7 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder
 
                         CalEvent event = new CalEvent(name, description, startDate, endDate, addressPhysical, addressOnline, Calendar,owned,editable);
                         events.add(event);
+                        calendar.events.add(event);
                     }
                 }
 
@@ -183,8 +192,11 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder
 
                         CalTask task = new CalTask(name, description, date, completed, Calendar,owned,editable);
                         tasks.add(task);
+                        calendar.tasks.add(task);
                     }
                 }
+
+                Singleton.getInstance().CalendarList.add(calendar);
 
             } catch (JSONException e) {
                 e.printStackTrace();

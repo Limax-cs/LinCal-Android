@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     EditText user = (EditText) findViewById(R.id.Lincal_login_user_txtbox);
                     EditText password = (EditText) findViewById(R.id.Lincal_login_password_txtbox);
 
-                    String query = String.format("http://192.168.1.4:9000/AndroidController/LogIn"); //IP Albert:192.168.1.4
+                    String query = String.format("http://" + Singleton.getInstance().IPaddress +":9000/AndroidController/LogIn"); //IP Albert:192.168.1.4
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setReadTimeout(10000);
@@ -149,17 +151,17 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    /*
 
+/*
     public void sayHelloAsynktask(View view) {
         EditText user = (EditText) findViewById(R.id.Lincal_login_user_txtbox);
         EditText password = (EditText) findViewById(R.id.Lincal_login_password_txtbox);
-        new HelloMessage(this).execute("http://192.168.1.3:9000/Application/LogIn?user=" + user.getText().toString() + "&password=" + password.getText().toString());
+        new HelloMessage(this).execute("http://" + Singleton.getInstance().IPaddress + ":9000/Application/LogIn?user=" + user.getText().toString() + "&password=" + password.getText().toString(),"");
     }
 
-    */
 
-/*
+
+
     private class HelloMessage extends AsyncTask<String, Void, String> {
         Context context;
         InputStream stream = null;
@@ -215,5 +217,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-    */
+*/
 }

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewCalEvent">
+
+    <View
+        android:id="@+id/NewCalEvent_layout"
+        android:layout_width="356dp"
+        android:layout_height="676dp"
+        android:background="@color/LinCal_LightGray"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.509" />
+
+    <LinearLayout
+        android:id="@+id/NewCalEvent_header"
+        android:layout_width="356dp"
+        android:layout_height="130dp"
+        android:background="@color/LinCal_lighterMainColor"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/NewCalEvent_layout"
+        app:layout_constraintStart_toStartOf="@+id/NewCalEvent_layout"
+        app:layout_constraintTop_toTopOf="@+id/NewCalEvent_layout">
+
+        <ImageView
+            android:id="@+id/NewCalEvent_show_drawable"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:alpha="0.8"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_event"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/NewCalEvent_show_calendar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="@string/NewCalEvent.title"
+            android:textColor="@color/white"
+            android:textSize="32sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/NewCalEvent_name_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/NewCalEvent.name.str"
+        app:layout_constraintBottom_toTopOf="@+id/NewCalEvent_name_txtbox"
+        app:layout_constraintStart_toStartOf="@+id/NewCalEvent_layout" />
+
+    <TextView
+        android:id="@+id/NewCalEvent_description_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/NewCalEvent.description.str"
+        app:layout_constraintBottom_toTopOf="@+id/NewCalEvent_description_txtbox"
+        app:layout_constraintStart_toStartOf="@+id/NewCalEvent_layout" />
+
+
+    <EditText
+        android:id="@+id/NewCalEvent_name_txtbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:ems="10"
+        android:hint="@string/NewCalEvent.name.txtbox"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.233"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalEvent_header" />
+
+    <EditText
+        android:id="@+id/NewCalEvent_description_txtbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/NewCalEvent.description.txtbox"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.238"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalEvent_name_txtbox" />
+
+    <Button
+        android:id="@+id/NewCalEvent_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:onClick="CreateEvent"
+        android:text="@string/NewCalEvent.createEvent.button"
+        app:layout_constraintBottom_toBottomOf="@+id/NewCalEvent_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/NewCalEvent_startDate_TimeStr"
+        android:layout_width="151dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/DateTime.str"
+        app:layout_constraintStart_toStartOf="@+id/NewCalEvent_layout"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalEvent_description_txtbox" />
+
+    <TextView
+        android:id="@+id/NewEvent_startDate_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/NewCalEvent.startDate.str"
+        app:layout_constraintEnd_toStartOf="@+id/NewCalEvent_startDate_TimeStr"
+        app:layout_constraintTop_toTopOf="@+id/NewCalEvent_startDate_TimeStr" />
+
+    <ImageButton
+        android:id="@+id/NewCalEvent_startDate_dateButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/LinCal_lighterMainColor"
+        android:onClick="setStartDate"
+        android:src="@drawable/ic_calendar"
+        android:tint="@color/LinCal_LightGray"
+        app:layout_constraintStart_toEndOf="@+id/NewCalEvent_startDate_TimeStr"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalEvent_description_txtbox" />
+
+    <ImageButton
+        android:id="@+id/NewCalEvent_startDate_hourButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/LinCal_lighterMainColor"
+        android:onClick="setStartTime"
+        android:src="@drawable/ic_time"
+        android:tint="@color/LinCal_LightGray"
+        app:layout_constraintStart_toEndOf="@+id/NewCalEvent_startDate_dateButton"
+        app:layout_constraintTop_toTopOf="@+id/NewCalEvent_startDate_dateButton" />
+
+    <ImageButton
+        android:id="@+id/NewCalEvent_endDate_hourButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@color/LinCal_lighterMainColor"
+        android:onClick="setEndTime"
+        android:src="@drawable/ic_time"
+        android:tint="@color/LinCal_LightGray"
+        app:layout_constraintStart_toEndOf="@+id/NewCalEvent_endDate_dateButton"
+        app:layout_constraintTop_toTopOf="@+id/NewCalEvent_endDate_dateButton" />
+
+    <ImageButton
+        android:id="@+id/NewCalEvent_endDate_dateButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/LinCal_lighterMainColor"
+        android:onClick="setEndDate"
+        android:src="@drawable/ic_calendar"
+        android:tint="@color/LinCal_LightGray"
+        app:layout_constraintStart_toEndOf="@+id/NewCalEvent_endDate_TimeStr"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalEvent_startDate_dateButton" />
+
+    <TextView
+        android:id="@+id/NewEvent_endDate_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/NewCalEvent.endDate.str"
+        app:layout_constraintEnd_toStartOf="@+id/NewCalEvent_endDate_TimeStr"
+        app:layout_constraintTop_toTopOf="@+id/NewCalEvent_endDate_TimeStr" />
+
+    <TextView
+        android:id="@+id/NewCalEvent_endDate_TimeStr"
+        android:layout_width="151dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/DateTime.str"
+        app:layout_constraintStart_toStartOf="@+id/NewCalEvent_layout"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalEvent_startDate_TimeStr" />
+
+    <ImageView
+        android:id="@+id/NewCalEvent_addressOnline_image"
+        android:layout_width="37dp"
+        android:layout_height="41dp"
+        app:layout_constraintBottom_toBottomOf="@+id/NewCalEvent_addressOnline_txtbox"
+        app:layout_constraintEnd_toStartOf="@+id/NewCalEvent_addressOnline_txtbox"
+        android:src="@drawable/ic_onlineaddress" />
+
+    <ImageView
+        android:id="@+id/NewCalEvent_addressPhysical_image"
+        android:layout_width="37dp"
+        android:layout_height="41dp"
+        app:layout_constraintBottom_toBottomOf="@+id/NewCalEvent_addressPhysical_txtbox"
+        app:layout_constraintEnd_toStartOf="@+id/NewCalEvent_addressPhysical_txtbox"
+        android:src="@drawable/ic_physicaladdress" />
+
+    <EditText
+        android:id="@+id/NewCalEvent_addressPhysical_txtbox"
+        android:layout_width="247dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/NewCalEvent.addressPhysical.str"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalEvent_endDate_TimeStr" />
+
+    <EditText
+        android:id="@+id/NewCalEvent_addressOnline_txtbox"
+        android:layout_width="247dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:hint="@string/NewCalEvent.addressOnline.str"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalEvent_addressPhysical_txtbox" />
+
+    <TextView
+        android:id="@+id/NewCalEvent_calendar_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/NewCalEvent.calendar.str"
+        app:layout_constraintStart_toStartOf="@+id/NewCalEvent_layout"
+        app:layout_constraintTop_toTopOf="@+id/NewCalEvent_calendar_seleccionable" />
+
+    <Button
+        android:id="@+id/NewCalEvent_calendar_seleccionable"
+        android:layout_width="157dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/LinCal_lighterMainColor"
+        android:text="@string/NewCalEvent.calendar.seleccionable"
+        app:layout_constraintStart_toEndOf="@+id/NewCalEvent_calendar_str"
+        app:layout_constraintTop_toBottomOf="@+id/NewCalEvent_header" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
