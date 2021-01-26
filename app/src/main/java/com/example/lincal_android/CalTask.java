@@ -2,6 +2,12 @@ package com.example.lincal_android;
 
 import java.util.Date;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: CalTask
+Tipus: class
+Funció: Defineix les variables d'una tasca
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class CalTask {
     // Constructor
     public CalTask(String taskName, String taskDescription, Date taskDate, boolean taskfinished, String calendarName, Boolean owned, Boolean editable)

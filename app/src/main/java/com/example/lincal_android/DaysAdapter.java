@@ -19,6 +19,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: DaysAdapter
+Tipus: RecyclerView.Adapter
+Funció: genera els objectes dels dies en el layout GlobalCalendar i les seves
+interaccions amb els objectes de tasques i calendaris. Crida CalTaskAdapter i/o
+CalEventsAdapter per generar els objectes de les tasques i esdeveniments
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder> {
 
     private List<Day> days;
@@ -29,11 +37,11 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder
 
     public DaysAdapter(List<Day> days, Context context)
     {
-
         this.days = days;
         this.context = context;
     }
 
+    //Genera la vista del dia
     @NonNull
     @Override
     public DaysViewHolder onCreateViewHolder(@NonNull ViewGroup  parent, int viewType)
@@ -47,23 +55,26 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder
         );
     }
 
+    //Relaciona la vista d'un dia amb la informació d'aquell dia
     @Override
     public void onBindViewHolder(@NonNull DaysViewHolder holder, int position){
         holder.bindDay(days.get(position));
     }
 
+    //Compta el nombre de dies que hi ha a la llista de RecyclerView
     @Override
     public int getItemCount(){
         return days.size();
     }
 
-
+    //Classe de la vista del dia
     class DaysViewHolder extends RecyclerView.ViewHolder{
 
         ConstraintLayout layoutDay;
         TextView dayText;
         RecyclerView recyclerViewEvents, recyclerViewTasks;
 
+        //Relaciona els textos de la llista i els RecyclerViews
         DaysViewHolder(@NonNull View itemsView){
             super(itemsView);
             layoutDay = itemsView.findViewById(R.id.GlobalCalendar_DayBox);
@@ -73,6 +84,7 @@ public class DaysAdapter extends RecyclerView.Adapter<DaysAdapter.DaysViewHolder
 
         }
 
+        //Es fica la informació d'un dia concret
         void bindDay(final Day day)
         {
             String[] week =

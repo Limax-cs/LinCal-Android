@@ -15,6 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: CalTasksAdapter
+Tipus: RecyclerView.Adapter
+Funció: genera els objectes de les tasques i la seva interacció amb els usuaris
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class CalTasksAdapter extends RecyclerView.Adapter<CalTasksAdapter.CalTasksViewHolder>{
 
     private List<CalTask> tasks;
@@ -27,6 +33,7 @@ public class CalTasksAdapter extends RecyclerView.Adapter<CalTasksAdapter.CalTas
         this.context = context;
     }
 
+    //Mostra la tasca
     @NonNull
     @Override
     public CalTasksAdapter.CalTasksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
@@ -40,6 +47,7 @@ public class CalTasksAdapter extends RecyclerView.Adapter<CalTasksAdapter.CalTas
         );
     }
 
+    //Relaciona l'objecte del CalTask amb la seva vista corresponent. Tot seguit, t'envia l'activitat CalTaskShow.
     @Override
     public void onBindViewHolder(@NonNull CalTasksAdapter.CalTasksViewHolder holder, int position){
         holder.bindCalTasks(tasks.get(position));
@@ -60,18 +68,21 @@ public class CalTasksAdapter extends RecyclerView.Adapter<CalTasksAdapter.CalTas
         });
     }
 
+    //Compta el nimbre de tasques
     @Override
     public int getItemCount(){
         return tasks.size();
     }
 
 
+    //Relaciona la informació amb la vista
     class CalTasksViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         ConstraintLayout layoutTask;
         TextView name, calendar, date;
         private ItemClickListener taskListener;
 
+        //Agafa els objecte de text
         CalTasksViewHolder(@NonNull View itemsView){
             super(itemsView);
             layoutTask = itemsView.findViewById(R.id.DayItem_TaskBox);
@@ -83,6 +94,7 @@ public class CalTasksAdapter extends RecyclerView.Adapter<CalTasksAdapter.CalTas
             itemsView.setOnLongClickListener(this);
         }
 
+        //Edita el contingut de la vista
         void bindCalTasks(final CalTask task)
         {
             String[] week =
@@ -115,17 +127,20 @@ public class CalTasksAdapter extends RecyclerView.Adapter<CalTasksAdapter.CalTas
 
         }
 
+        //Defineix un Listener
         public void setItemClickListener(ItemClickListener itemClickListener)
         {
             this.taskListener = itemClickListener;
         }
 
+        //Detecta que s'ha pitjat tasca
         @Override
         public void onClick(View v) {
 
             taskListener.onClick(v,getAdapterPosition(),false);
         }
 
+        //Detecta que s'ha pitjat tasca en lapse de temps llarg
         @Override
         public boolean onLongClick(View v) {
             taskListener.onClick(v,getAdapterPosition(),true);

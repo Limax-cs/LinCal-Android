@@ -12,6 +12,12 @@ import android.widget.Toast;
 
 import java.util.Date;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: CalTaskShow
+Tipus: AppCompatActivity
+Funció: genera el layout de la informació d'una tasca
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class CalTaskShow extends AppCompatActivity {
 
     Boolean owned;
@@ -78,7 +84,7 @@ public class CalTaskShow extends AppCompatActivity {
 
     }
 
-    //Butons per modificar la tasca
+    //Butons per modificar la tasca (no són visibles)
     public void editTask(View view)
     {
         if(editable)

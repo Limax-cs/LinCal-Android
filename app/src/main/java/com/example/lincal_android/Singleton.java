@@ -5,6 +5,13 @@ import org.json.JSONArray;
 import java.util.Calendar;
 import java.util.List;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: Singleton
+Tipus: Singleton
+Funció: genera una classe amb instància única per compartir les dades entre totes
+les activitats
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class Singleton {
     private static final Singleton ourInstance = new Singleton();
 

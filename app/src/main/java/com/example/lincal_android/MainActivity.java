@@ -23,32 +23,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/*
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.StrictMode;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: MainActivity
+Tipus: AppCompatActivity
+Funció: genera el layout de registre de l'usuari i la primer activity en mostrar-se
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,10 +37,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+
+    /*
+     Funció SingUp
+     T'encamina a una activity nova per crear un nou usuari
+     */
+
     public void SignUp(View view){
         Intent intent = new Intent(this,SignUp.class);
         startActivity(intent);
     }
+
+    /*
+     Funció Login
+     Es comunica amb el servidor i determina si l'autenticació és correcte o no
+     Mostra els esdeveniments i calendaris a una nova activity
+     */
 
     public void LoginApp(View view) {
 
@@ -76,11 +67,12 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
-                    //Strings
+                    //Obtenció dels valors dels EditText
                     EditText user = (EditText) findViewById(R.id.Lincal_login_user_txtbox);
                     EditText password = (EditText) findViewById(R.id.Lincal_login_password_txtbox);
 
-                    String query = String.format("http://" + Singleton.getInstance().IPaddress +":9000/AndroidController/LogIn"); //IP Albert:192.168.1.4
+                    //Crea la petició
+                    String query = String.format("http://" + Singleton.getInstance().IPaddress +":9000/AndroidController/LogIn");
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setReadTimeout(10000);
@@ -90,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     conn.setDoOutput(true);
                     conn.connect();
 
-
+                    //Determina les variables de la petició
                     String params = "user=" + user.getText().toString() + "&password=" + password.getText().toString();
                     OutputStream os = conn.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(
@@ -101,12 +93,10 @@ public class MainActivity extends AppCompatActivity {
                     writer.close();
                     os.close();
 
+                    //Llegeix la resposta de la petició
                     stream = conn.getInputStream();
-
                     BufferedReader reader = null;
-
                     StringBuilder sb = new StringBuilder();
-
                     reader = new BufferedReader(new InputStreamReader(stream));
 
                     String line = null;
@@ -151,71 +141,4 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-
-/*
-    public void sayHelloAsynktask(View view) {
-        EditText user = (EditText) findViewById(R.id.Lincal_login_user_txtbox);
-        EditText password = (EditText) findViewById(R.id.Lincal_login_password_txtbox);
-        new HelloMessage(this).execute("http://" + Singleton.getInstance().IPaddress + ":9000/Application/LogIn?user=" + user.getText().toString() + "&password=" + password.getText().toString(),"");
-    }
-
-
-
-
-    private class HelloMessage extends AsyncTask<String, Void, String> {
-        Context context;
-        InputStream stream = null;
-        String str = "";
-        String result = null;
-
-        private HelloMessage(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        protected String doInBackground(String... urls) {
-
-            try {
-                String query = String.format(urls[0]);
-                URL url = new URL(query);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(10000);
-                conn.setConnectTimeout(15000);
-                conn.setRequestMethod("GET");
-                conn.setDoInput(true);
-                conn.connect();
-                stream = conn.getInputStream();
-
-                BufferedReader reader = null;
-
-                StringBuilder sb = new StringBuilder();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-                result = sb.toString();
-
-
-                Log.i("lolaforms1", result);
-
-
-                return result;
-
-            } catch (IOException e) {
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-
-            TextView n = (TextView) findViewById(R.id.Lincal_login_adverts);
-            n.setText("AsynkTask: " + result);
-
-        }
-    }
-*/
 }

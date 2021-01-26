@@ -20,6 +20,13 @@ import java.util.List;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: CalEventsAdapter
+Tipus: RecyclerView.Adapter
+Funció: genera els objectes dels esdeveniments i la seva interacció amb els
+usuaris
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class CalEventsAdapter extends RecyclerView.Adapter<CalEventsAdapter.CalEventsViewHolder>{
 
     private List<CalEvent> events;
@@ -31,6 +38,7 @@ public class CalEventsAdapter extends RecyclerView.Adapter<CalEventsAdapter.CalE
         this.context = context;
     }
 
+    //Mostra l'esdeveniment
     @NonNull
     @Override
     public CalEventsAdapter.CalEventsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
@@ -44,6 +52,7 @@ public class CalEventsAdapter extends RecyclerView.Adapter<CalEventsAdapter.CalE
         );
     }
 
+    //Relaciona l'objecte del CalEvent amb la seva vista corresponent. Tot seguit, t'envia l'activitat CalEventShow.
     @Override
     public void onBindViewHolder(@NonNull CalEventsAdapter.CalEventsViewHolder holder, int position){
         holder.bindCalEvent(events.get(position));
@@ -69,19 +78,20 @@ public class CalEventsAdapter extends RecyclerView.Adapter<CalEventsAdapter.CalE
         });
     }
 
+    //Compta el nombre d'esdeveniments
     @Override
     public int getItemCount(){
         return events.size();
     }
 
-
-
+    //Relaciona la informació amb la vista
     class CalEventsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         ConstraintLayout layoutEvent;
         TextView name, calendar, StartDate, EndDate;
         private ItemClickListener eventListener;
 
+        //Agafa els objecte de text
         CalEventsViewHolder(@NonNull View itemsView){
             super(itemsView);
             layoutEvent = itemsView.findViewById(R.id.DayItem_EventBox);
@@ -94,23 +104,28 @@ public class CalEventsAdapter extends RecyclerView.Adapter<CalEventsAdapter.CalE
             itemsView.setOnLongClickListener(this);
 
         }
+
+        //Defineix un Listener
         public void setItemClickListener(ItemClickListener itemClickListener)
         {
             this.eventListener = itemClickListener;
         }
 
+        //Detecta que s'ha pitjat l'esdeveniment
         @Override
         public void onClick(View v) {
 
             eventListener.onClick(v,getAdapterPosition(),false);
         }
 
+        ////Detecta que s'ha pitjat l'esdeveniment en lapse de temps llarg
         @Override
         public boolean onLongClick(View v) {
             eventListener.onClick(v,getAdapterPosition(),true);
             return true;
         }
 
+        //Edita el contingut de la vista
         void bindCalEvent(final CalEvent event)
         {
             String[] week =

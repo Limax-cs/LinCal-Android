@@ -20,6 +20,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: SingUp
+Tipus: AppCompatActivity
+Funció: genera el layout de la creació d'un usuari
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class SignUp extends AppCompatActivity {
 
     @Override
@@ -29,6 +35,7 @@ public class SignUp extends AppCompatActivity {
     }
     public void SignUp(View view) {
 
+        //Creem el contingut de la caixeta d'advertiments
         TextView n = (TextView) findViewById(R.id.Lincal_signup_warnings);
         n.setText("Funciona?");
 
@@ -43,13 +50,14 @@ public class SignUp extends AppCompatActivity {
 
                 try {
 
-                    //Strings
+                    //Extraiem la informació que ha col·locat l'usuari
                     n.setText("1");
                     EditText fullname = (EditText) findViewById(R.id.Lincal_signup_fullname_txtbox);
                     EditText email = (EditText) findViewById(R.id.Lincal_signup_email_txtbox);
                     EditText user = (EditText) findViewById(R.id.Lincal_signup_user_txtbox);
                     EditText password = (EditText) findViewById(R.id.Lincal_signup_password_txtbox);
 
+                    //Ens connectem amb el servidor
                     n.setText("2");
                     String query = String.format("http://" + Singleton.getInstance().IPaddress + ":9000/AndroidController/SignUp"); //IP Albert:192.168.1.4
                     URL url = new URL(query);
@@ -61,6 +69,7 @@ public class SignUp extends AppCompatActivity {
                     conn.setDoOutput(true);
                     conn.connect();
 
+                    //Conformem el missatge a enviar i l'enviem
                     n.setText("3");
                     String params = "fullname=" + fullname.getText().toString() + "&email=" + email.getText().toString()+ "&user=" + user.getText().toString()+ "&password=" + password.getText().toString();
                     OutputStream os = conn.getOutputStream();
@@ -74,6 +83,7 @@ public class SignUp extends AppCompatActivity {
 
                     n.setText("4");
 
+                    //Rebem la resposta del servidor
                     stream = conn.getInputStream();
 
                     BufferedReader reader = null;
@@ -89,7 +99,6 @@ public class SignUp extends AppCompatActivity {
                     result = sb.toString();
 
                     // Mostrar resultat en el quadre de text.
-                    // Codi incorrecte
 
                     n.setText(result);
                     n.setText("6");

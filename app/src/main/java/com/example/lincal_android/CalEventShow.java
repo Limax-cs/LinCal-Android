@@ -12,6 +12,12 @@ import android.widget.Toast;
 
 import java.util.Date;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: CalEventShow
+Tipus: AppCompatActivity
+Funció: genera el layout de la informació d'un esdeveniment
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class CalEventShow extends AppCompatActivity {
 
     Boolean owned;
@@ -74,7 +80,7 @@ public class CalEventShow extends AppCompatActivity {
 
     }
 
-    //Butons per modificar la tasca
+    //Butons per modificar la tasca (no són visibles)
     public void editEvent(View view)
     {
         if(editable)

@@ -4,8 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: LinCalendar
+Tipus: class
+Funció: Defineix les variables d'un calendari
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class LinCalendar {
 
+    //Constructor
     public LinCalendar (String calName, String description, Date createdAt, Boolean isPublic, Boolean owned, Boolean editable)
     {
         this.calName = calName;

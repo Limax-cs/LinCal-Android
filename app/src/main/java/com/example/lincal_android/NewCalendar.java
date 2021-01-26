@@ -23,6 +23,14 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: NewCalendar
+Tipus: AppCompatActivity
+Funció: genera el layout per reomplir les dades d'un calendari i crear-lo. Aquí
+també entra la interacció amb el servidor i tots els objectes necessàris per posar
+la informació
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class NewCalendar extends AppCompatActivity {
 
     @Override

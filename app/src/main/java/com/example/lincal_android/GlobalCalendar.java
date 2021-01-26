@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,6 +28,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: GlobalCalendar
+Tipus: AppCompatActivity
+Funció: genera el layout de la llista de dies amb els esdeveniments i tasques.
+Crida el DaysAdapter per tal de mostrar els objectes d'un dia
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 public class GlobalCalendar extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -47,6 +55,8 @@ public class GlobalCalendar extends AppCompatActivity implements DatePickerDialo
             public void run() {
 
                 try{
+
+                    //Fa la petició dels calendaris
                     String query = String.format("http://" + Singleton.getInstance().IPaddress + ":9000/AndroidController/getCalendarList?user=" + Singleton.getInstance().userName);
                     URL url = new URL(query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -56,6 +66,7 @@ public class GlobalCalendar extends AppCompatActivity implements DatePickerDialo
                     conn.setDoInput(true);
                     conn.connect();
 
+                    //Processa la resposta
                     stream = conn.getInputStream();
                     BufferedReader reader = null;
                     StringBuilder sb = new StringBuilder();
@@ -73,72 +84,65 @@ public class GlobalCalendar extends AppCompatActivity implements DatePickerDialo
 
                             if(!result.contains("Error"))
                             {
-                                //TODO: mostreig de la llista d'objectes a l'aplicació
-                                //textview.setText(result);
+                                //Processament de la resposta JSON
                                 ShowJSONresult(result);
                             }
                             else
                             {
-                                //TODO: mostra error de llista buida
-                                //textview.setText("bruh");
+                                //Avís d'algún error en la llista
+                                Toast.makeText(getBaseContext(),"Hi hagut algún error en la càrrega de calendaris", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 }
                 catch (Exception e){
                     e.printStackTrace();
-
+                    Toast.makeText(getBaseContext(),"Hi ha un error de connexió amb el servidor", Toast.LENGTH_SHORT).show();
                 }
 
             }
         }).start();
     }
 
+    /*
+     Funció ShowJSONresult
+     Processa les dades rebudes en format JSON en el moment de crear l'activitat i mostreja els dies d'aquesta setmana
+     */
+
     public void ShowJSONresult(String result)
     {
 
         try {
 
+            //Separa el resultat en tres llistes de calendaris segons el nivell d'accessibilitat de l'usuari
             JSONObject Calendars = new JSONObject(result);
             Singleton.getInstance().ownedCalendars = Calendars.getJSONArray("ownedCalendars");
             Singleton.getInstance().editableCalendars = Calendars.getJSONArray("editableCalendars");
             Singleton.getInstance().nonEditableCalendars = Calendars.getJSONArray("nonEditableCalendars");
-            Singleton.getInstance().CalendarList.clear();
 
-            RecyclerView daysRecyclerView = findViewById(R.id.GlobalCalendar_RecyclerView);
-
-            List<Day> days = new ArrayList<>();
-            days.clear();
-
-            Date today = new Date();
-
-            int daySelectedWeek = today.getDay();
-            if(today.getDay() == 0)
-                daySelectedWeek = 7;
-
-            for(int i=1-daySelectedWeek; i < (8 - daySelectedWeek); i++)
-            {
-                Day day = new Day();
-
-                day.dateDay.setTime((long)(today.getTime() + i * 24 * 3600 * 1000));
-                days.add(day);
-            }
-
-            Context context = getApplicationContext();
-            final DaysAdapter daysAdapter = new DaysAdapter(days, context);
-            daysRecyclerView.setAdapter(daysAdapter);
+            //Carrega els dies d'una setmana dins d'un RecyclerView
+            DayUpdate(new Date().getYear(), new Date().getMonth(), new Date().getDate());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    //Botons de la pantalla
+    /*
+     Funció CreateCalendarLayout
+     T'envia a una activitat que et permet crear calendaris
+     */
+
     public void CreateCalendarLayout(View view)
     {
         Intent intent = new Intent(this,NewCalendar.class);
         startActivity(intent);
     }
+
+    /*
+     Funció CreateEventLayout
+     T'envia a una activitat que et permet crear esdeveniments d'un calendari
+     */
 
     public void CreateEventLayout(View view)
     {
@@ -146,8 +150,19 @@ public class GlobalCalendar extends AppCompatActivity implements DatePickerDialo
         startActivity(intent);
     }
 
-    //Selecciona Dia
+    /*
+     Funció setDay
+     Tria un dia dins del calendari perquè es mostrin els esdeveniments i tasques d'altres dies
+     */
 
+
+    //Obre el diàleg de la selecció de dies en un calendari
+    public void setDay(View view)
+    {
+        showDatePickerDialog();
+    }
+
+    //Especifica els paràmetres del diàleg de selecció de dia
     private void showDatePickerDialog()
     {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -160,22 +175,26 @@ public class GlobalCalendar extends AppCompatActivity implements DatePickerDialo
         datePickerDialog.show();
     }
 
-    public void setDay(View view)
-    {
-        showDatePickerDialog();
-    }
-
+    //Procesa el resultat després d'haver escollit un dia
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-        DayUpdate(year,month,dayOfMonth);
-
+        DayUpdate((year-1900),month,dayOfMonth);
     }
+
+    /*
+     Funció setDay
+     Et porta a la setmana actual en la llista de dies
+     */
 
     public void setToday(View view)
     {
         DayUpdate(new Date().getYear(), new Date().getMonth(), new Date().getDate());
     }
+
+    /*
+     Funció DayUpdate
+     Carrega els dies d'una setmana especificada en els paràmetres
+     */
 
     public void DayUpdate(int year, int month, int dayOfMonth)
     {
@@ -200,7 +219,7 @@ public class GlobalCalendar extends AppCompatActivity implements DatePickerDialo
             day.dateDay.setTime((long)(daySelected.getTime() + i * 24 * 3600 * 1000));
             days.add(day);
         }
-
+        //Crida la funció que organitza els dies de la llista
         Context context = getApplicationContext();
         final DaysAdapter daysAdapter = new DaysAdapter(days, context);
         daysRecyclerView.setAdapter(daysAdapter);

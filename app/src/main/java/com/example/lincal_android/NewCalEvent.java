@@ -41,6 +41,13 @@ import java.util.List;
 
 import static com.example.lincal_android.Singleton.getInstance;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: NewCalEvent
+Tipus: AppCompatActivity
+Funció: genera la pantalla interactiva de creació d'un esdeveniment. Es communica amb
+el servidor i també amb botons necessaris per afegir la informació
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
     Date startDate = new Date();
@@ -53,7 +60,6 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
 
     //Llista de calendaris
     String popUpCalendars[];
-    //PopupWindow
     PopupWindow popupWindowCalendars;
     Button calendarListButtonDropDown;
 
@@ -64,8 +70,8 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
 
         startDateTV = (TextView)findViewById(R.id.NewCalEvent_startDate_TimeStr);
         endDateTV = (TextView)findViewById(R.id.NewCalEvent_endDate_TimeStr);
-        startDateTV.setText(startDate.getDate() + "/" + (1+startDate.getMonth()) + "/" + startDate.getYear() + ", " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds());
-        endDateTV.setText(endDate.getDate() + "/" + (1+endDate.getMonth()) + "/" + endDate.getYear() + ", " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds());
+        startDateTV.setText(startDate.getDate() + "/" + (1+startDate.getMonth()) + "/" + (1900 + startDate.getYear()) + ", " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds());
+        endDateTV.setText(endDate.getDate() + "/" + (1+endDate.getMonth()) + "/" + (1900 + endDate.getYear()) + ", " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds());
 
         //Llista de calendaris seleccionables
         List<LinCalendar> CalendarList = Singleton.getInstance().CalendarList;
@@ -81,11 +87,11 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
             }
         }
 
-        //Conversió a un array simple
+        //Conversió de la llista de calendaris seleccionables a un array simple
         popUpCalendars = new String[calendarNames.size()];
         calendarNames.toArray(popUpCalendars);
 
-        //Incialitzar el popup
+        //Incialitzar el menú desplegable
         popupWindowCalendars = popupWindowCalendars();
 
         //Listener del botó de calendaris
@@ -110,30 +116,30 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
 
     public PopupWindow popupWindowCalendars() {
 
-        // Inicialitza el popup
+        //Creació de la finestra emergent
         PopupWindow popupWindow = new PopupWindow(this);
 
-        //
+        //Creació de la llista dins la finestra emergent
         ListView listViewCalendars = new ListView(this);
 
-        //
+        //Relació entre la finestra emergent i la llista -> menú desplegable
         listViewCalendars.setAdapter(calendarsAdapter(popUpCalendars));
 
-        //
+        //Crida la funció de selcció d'un objecte de la llista
         listViewCalendars.setOnItemClickListener(new CalendarDropDownOnItemClickListener());
 
-        // some other visual settings
+        //Definició d'aspectes visuals de menú desplegable
         popupWindow.setFocusable(true);
-        popupWindow.setWidth(250);
+        popupWindow.setWidth(400);
         popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
 
-        //
+        //Fica la informació de la llista de strings a la la llista que veu l'usuari
         popupWindow.setContentView(listViewCalendars);
 
         return popupWindow;
     }
 
-
+    //Definició d'aspectes visuals de cada element del menú desplegable
     private ArrayAdapter<String> calendarsAdapter(String dogsArray[]) {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dogsArray) {
@@ -141,13 +147,13 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
 
-                //
+                //S'agafa el nom del calendari de la llista de strings (la id no s'utilitza)
                 String item = getItem(position);
                 String[] itemArr = item.split("::");
                 String text = itemArr[0];
                 String id = itemArr[1];
 
-                //
+                //i es col·loca a la llista que veu l'usuari
                 TextView listItem = new TextView(NewCalEvent.this);
 
                 listItem.setText(text);
@@ -163,8 +169,8 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
         return adapter;
     }
 
-    //Selectors de dates
 
+    //Finestreta emergent del calendari del sistema per escollir una data concreta
     private void showDatePickerDialog()
     {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -176,7 +182,7 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
         );
         datePickerDialog.show();
     }
-
+    //Finestreta emergent per escollir una hora concreta
     private void showTimePickerDialog()
     {
         TimePickerDialog timePickerDialog = new TimePickerDialog(
@@ -189,43 +195,46 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
         timePickerDialog.show();
     }
 
-
+    //Recull la data seleccionada i l'escriu en un TextView
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         if(startDateUpdate)
         {
-            startDate.setYear(year);
+            startDate.setYear(year-1900);
             startDate.setMonth(month);
             startDate.setDate(dayOfMonth);
 
-            startDateTV.setText(startDate.getDate() + "/" + (1+startDate.getMonth()) + "/" + startDate.getYear() + ", " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds());
+            startDateTV.setText(startDate.getDate() + "/" + (1+startDate.getMonth()) + "/" + (1900 + startDate.getYear()) + ", " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds());
             startDateUpdate = false;
         }
 
         if(endDateUpdate)
         {
-            endDate.setYear(year);
+            endDate.setYear(year-1900);
             endDate.setMonth(month);
             endDate.setDate(dayOfMonth);
 
-            endDateTV.setText(endDate.getDate() + "/" + (1+endDate.getMonth()) + "/" + endDate.getYear() + ", " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds());
+            endDateTV.setText(endDate.getDate() + "/" + (1+endDate.getMonth()) + "/" + (1900 + endDate.getYear()) + ", " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds());
             endDateUpdate = false;
         }
     }
 
+    //Funció de reposta en clicar el botó de la selecció de la data d'inici
     public void setStartDate(View view)
     {
         startDateUpdate = true;
         showDatePickerDialog();
     }
 
+    //Funció de reposta en clicar el botó de la selecció de la data final
     public void setEndDate(View view)
     {
         endDateUpdate = true;
         showDatePickerDialog();
     }
 
+    //Recull l'hora seleccionada i l'escriu en un TextView
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
@@ -234,7 +243,7 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
             startDate.setHours(hourOfDay);
             startDate.setMinutes(minute);
 
-            startDateTV.setText(startDate.getDate() + "/" + (1+startDate.getMonth()) + "/" + startDate.getYear() + ", " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds());
+            startDateTV.setText(startDate.getDate() + "/" + (1+startDate.getMonth()) + "/" + (1900 + startDate.getYear()) + ", " + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds());
             startDateUpdate = false;
         }
 
@@ -243,23 +252,26 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
             endDate.setHours(hourOfDay);
             endDate.setMinutes(minute);
 
-            endDateTV.setText(endDate.getDate() + "/" + (1+endDate.getMonth()) + "/" + endDate.getYear() + ", " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds());
+            endDateTV.setText(endDate.getDate() + "/" + (1+endDate.getMonth()) + "/" + (1900 + endDate.getYear()) + ", " + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds());
             endDateUpdate = false;
         }
     }
 
+    //Funció de reposta en clicar el botó de la selecció de la hora d'inici
     public void setStartTime(View view)
     {
         startDateUpdate = true;
         showTimePickerDialog();
     }
 
+    //Funció de reposta en clicar el botó de la selecció de la hora final
     public void setEndTime(View view)
     {
         endDateUpdate = true;
         showTimePickerDialog();
     }
 
+    //Botó de creació de l'esdeveniment. Es connecta amb el servidor i li lliura la informació.
     public void CreateEvent(View view) {
         if (calName.isEmpty())
         {
@@ -283,6 +295,7 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
                         EditText addressPhysical = (EditText) findViewById(R.id.NewCalEvent_addressPhysical_txtbox);
                         EditText addressOnline = (EditText) findViewById(R.id.NewCalEvent_addressOnline_txtbox);
 
+                        //Petició al servidor
                         String query = String.format("http://" + getInstance().IPaddress + ":9000/AndroidController/CreateEvent"); //IP Albert:192.168.1.4
                         URL url = new URL(query);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -293,6 +306,7 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
                         conn.setDoOutput(true);
                         conn.connect();
 
+                        //Definir variables
                         String params = "user=" + getInstance().userName +
                                 "&password=" + getInstance().password +
                                 "&name=" + name.getText().toString() +
@@ -312,14 +326,11 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
                         writer.close();
                         os.close();
 
+                        //Rebuda de la resposta del servidor
                         stream = conn.getInputStream();
-
                         BufferedReader reader = null;
-
                         StringBuilder sb = new StringBuilder();
-
                         reader = new BufferedReader(new InputStreamReader(stream));
-
                         String line = null;
                         while ((line = reader.readLine()) != null) {
                             sb.append(line);
@@ -330,7 +341,7 @@ public class NewCalEvent extends AppCompatActivity implements DatePickerDialog.O
                         Log.i("login_response", result);
                         handler.post(new Runnable() {
                             public void run() {
-
+                                //Avisos conforme la resposta del servidor
                                 if (result.contains("OK")) {
                                     Toast.makeText(getBaseContext(), "ESDEVENIMENT CREAT", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getBaseContext(), GlobalCalendar.class);

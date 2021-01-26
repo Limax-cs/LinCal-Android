@@ -2,6 +2,12 @@ package com.example.lincal_android;
 
 import java.util.Date;
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Classe: CalEvent
+Tipus: class
+Funció: Defineix els atributs de la classe esdeveniment
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 public class CalEvent {
 
     // Constructor
