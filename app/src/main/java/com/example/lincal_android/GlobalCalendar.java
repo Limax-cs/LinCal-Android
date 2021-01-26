@@ -226,4 +226,13 @@ public class GlobalCalendar extends AppCompatActivity implements DatePickerDialo
     }
 
 
+     /*
+     Funció LogOut
+     Surt de la sessió
+     */
+    public void LogOut(View view)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

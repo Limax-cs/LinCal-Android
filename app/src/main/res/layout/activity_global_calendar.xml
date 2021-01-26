@@ -21,12 +21,12 @@
         >
 
         <ImageView
-            android:id="@+id/GlobalCalendar_SelectToday"
+            android:id="@+id/GlobalCalendar_LogOut"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:contentDescription="@string/app_name"
-            android:onClick="setToday"
-            android:src="@drawable/ic_today"
+            android:onClick="LogOut"
+            android:src="@drawable/ic_logout"
             app:tint="@color/white" />
         <TextView
             android:layout_width="0dp"
@@ -40,6 +40,14 @@
             android:textSize="16sp"
             android:textStyle="bold"
             />
+        <ImageView
+            android:id="@+id/GlobalCalendar_SelectToday"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:contentDescription="@string/app_name"
+            android:onClick="setToday"
+            android:src="@drawable/ic_today"
+            app:tint="@color/white" />
         <ImageView
             android:id="@+id/GlobalCalendar_SelectDay"
             android:layout_width="28dp"

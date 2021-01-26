@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/GlobalCalendar_DayBox"
-    android:layout_width="match_parent"
+    android:layout_width="370dp"
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
 
@@ -78,26 +78,24 @@
         app:layout_constraintEnd_toEndOf="@+id/GlobalCalendar_DayContent"
         app:layout_constraintTop_toBottomOf="@+id/GlobalCalendar_DayHeader" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/DayItem_RecycleView_events"
-            android:layout_width="219dp"
-            android:layout_height="441dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/GlobalCalendar_DayContent"
-            app:layout_constraintTop_toTopOf="@+id/GlobalCalendars_eventsTitle"
-            app:layout_constraintVertical_bias="1.0"
-            android:background="@color/LinCal_LightGray"
-            />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/DayItem_RecycleView_events"
+        android:layout_width="190dp"
+        android:layout_height="441dp"
+        android:background="@color/LinCal_LightGray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/GlobalCalendar_DayContent"
+        app:layout_constraintTop_toTopOf="@+id/GlobalCalendars_eventsTitle"
+        app:layout_constraintVertical_bias="1.0" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/DayItem_RecycleView_tasks"
-            android:layout_width="179dp"
-            android:layout_height="441dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/GlobalCalendar_DayHeader"
-            app:layout_constraintVertical_bias="1.0"
-            android:background="@color/LinCal_LightGray"
-            />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/DayItem_RecycleView_tasks"
+        android:layout_width="179dp"
+        android:layout_height="441dp"
+        android:background="@color/LinCal_LightGray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GlobalCalendar_DayHeader"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
