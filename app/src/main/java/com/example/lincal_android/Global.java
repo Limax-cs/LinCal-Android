@@ -25,6 +25,6 @@ public class Global extends Application {
         Singleton.getInstance().editableCalendars = new JSONArray();
         Singleton.getInstance().nonEditableCalendars = new JSONArray();
         Singleton.getInstance().CalendarList = new ArrayList<>();
-        Singleton.getInstance().IPaddress = "192.168.1.3";
+        Singleton.getInstance().IPaddress = "62.57.250.39";
     }
 }

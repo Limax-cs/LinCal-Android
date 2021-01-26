@@ -67,7 +67,7 @@
 
     <TextView
         android:id="@+id/Lincal_login_warnings"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
         android:text="@string/Login.warnings.lbl"
